@@ -22,8 +22,7 @@
 
 ## SLIDE 2 — [Timeline CYBERCRISE]
 
-mermaid
-```
+```mermaid
 %%{init: {"timeline": {"layout": "linear"}}}%%
 timeline
     title Cyber Incident Timeline (KYCPro)
@@ -33,7 +32,7 @@ timeline
     section Escalade
       J-2 09h00 : Escalade SOC (tentative exfiltration depuis API KYCPro)
     section Confirmation & Réponse
-      J-1 10h00 : Confirmation intrusion KYCPro (CVE-2026-4242 : faille d’authentification)
+      J-1 10h00 : Confirmation intrusion KYCPro (CVE-2026-4242 : faille d'authentification)
       J-1 12h00 : Confirmation exfiltration données sensibles
       J-1 14h00 : Isolation API KYCPro
       J-1 16h00 : Revendication Not42 + menace fuite publique
