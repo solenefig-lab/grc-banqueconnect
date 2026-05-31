@@ -1,6 +1,6 @@
 # Présentation COMEX — Incident de sécurité J+0 09h00
 
-> Retrouver la timeline de la gestion de la cybercrise et le compte-rendu de la réunion COMEX avec matrice d'arbitrage: [Timeline Gestion Cybercrise](./timeline-crise.md).
+> Retrouver la timeline de la gestion de la cybercrise et le compte-rendu de la réunion COMEX avec matrice d'arbitrage: [Timeline Gestion Cybercrise](./timeline-crise.md).  
 > Simulation · Format présentateur assumé (RSSI) · Format Présentation Slide + Notes personnelles du présentateur
 
 > Note pédagogique : Les slides sont conçues pour une présentation en séance - support minimal, orateur indispensable. Les notes personnelles du présentateur reconstituent le discours du RSSI et ses arbitrages en temps réel.
@@ -14,9 +14,9 @@
 3- Mitigation: Isolation API KYCPro du reste Open Banking
 
 > **Note**
-> Forensique en cours pour déterminer ampleur totale fuite
-> KYC essentiel dans vérification identité clients - indispensable dans continuité business BanqueConnect
-> KYCPro seul fournisseur à date
+> Forensique en cours pour déterminer ampleur totale fuite  
+> KYC essentiel dans vérification identité clients - indispensable dans continuité business BanqueConnect  
+> KYCPro seul fournisseur à date  
 
 ---
 
@@ -39,11 +39,11 @@ timeline
 ```
 
 > **Note**
-> 2H entre 1eres anomalies et 1eres alertes SOC
-> 44H jusqu'à confirmation exploit par KYCPro et 46H confirmation exfiltration données sensibles
-> Incident RGPD confirmé: délai court depuis 19H.
-> Incident DORA à anticper: délai 4H à partir qualification incident majeur --> imminent
-> Crise médiatique en cours : ce matin 08h00 article dans les Echos.
+> 2H entre 1eres anomalies et 1eres alertes SOC  
+> 44H jusqu'à confirmation exploit par KYCPro et 46H confirmation exfiltration données sensibles  
+> Incident RGPD confirmé: délai court depuis 19H  
+> Incident DORA à anticper: délai 4H à partir qualification incident majeur --> imminent  
+> Crise médiatique en cours : ce matin 08h00 article dans les Echos  
 
 ---
 
@@ -55,12 +55,12 @@ timeline
 Décision requise: qualification officielle incident majeur.
 
 > **Note**
-> DORA: anticipation de la qualification crise majeure probable; principe de précaution, en assumant que la qualification formelle interviendra dans l'heure.
-> DORA: forensic suffisant pour qualifier avec certitude --> nombre de clients impactés, nature des données, impact opérationnel, contagion potentielle.
-> DORA: risques sanctions.
-> CNIL: délai maintenant sous 51H.
->  CNIL: Risque de sanctions (4% CA)
-> CNIL - Personnes concernés --> Risque élevé (IBAN + SSN exposés → risque de fraude/usurpation)
+> DORA: anticipation de la qualification crise majeure probable; principe de précaution, en assumant que la qualification formelle interviendra dans l'heure  
+> DORA: forensic suffisant pour qualifier avec certitude --> nombre de clients impactés, nature des données, impact opérationnel, contagion potentielle  
+> DORA: risques sanctions  
+> CNIL: délai maintenant sous 51H  
+>  CNIL: Risque de sanctions (4% CA)  
+> CNIL - Personnes concernés --> Risque élevé (IBAN + SSN exposés → risque de fraude/usurpation)  
 
 ---
 
@@ -71,8 +71,8 @@ Décision requise: qualification officielle incident majeur.
 - Risque élevé nouvelles fuites
 
 > **Note**
-> Risque inacceptable de nouvelle fuite. Je recommande la coupure.
-> Solution intermédiaire (non recommandé au vu risque sécurité): Maintenir l’API avec surveillance renforcée (logs en temps réel) + Rate-limiting sur les endpoints sensibles.
+> Risque inacceptable de nouvelle fuite. Je recommande la coupure  
+> Solution intermédiaire (non recommandé au vu risque sécurité): Maintenir l’API avec surveillance renforcée (logs en temps réel) + Rate-limiting sur les endpoints sensibles  
 
 ---
 
@@ -84,6 +84,6 @@ Décision requise: qualification officielle incident majeur.
 - Lancer communication de crise / cellule juridique sur revendication Not42 / Articles de presse
 
 > **Note**
-> A moyen terme: Rapport final DORA sous 30 jours
-> Retour d'expérience à planifier sous 30 jours également
-> Renforcer clauses DORA fournisseurs
+> A moyen terme: Rapport final DORA sous 30 jours  
+> Retour d'expérience à planifier sous 30 jours également  
+> Renforcer clauses DORA fournisseurs  
