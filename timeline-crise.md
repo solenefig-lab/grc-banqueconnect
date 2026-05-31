@@ -26,7 +26,7 @@ Environnement technique
 ### Parties prenantes
 
 | Rôle | Responsable | Actions pendant la crise | Conflits d’intérêts |
-|----------|-----------------|-------------------------------|----------------------|--------------------------|
+|----------|-----------------|-------------------------------|----------------------|
 | **COMEX** | CEO | Prise de décision | **Business** : Maintenir les services vs **Sécurité** : Limiter les risques. |
 | **SOC** | Responsable SOC (N3)| Investigation technique (logs, forensic) | **Urgence** : Agir vite vs **Précision** : Attendre les preuves. |
 | **RSSI** | RSSI | Coordination de la cellule de crise · Arbitrages techniques · Recommandations au COMEX | **Sécurité** : Coupure API vs **Business** : Continuité de service |
@@ -42,19 +42,12 @@ Environnement technique
 ## 1 - Phase de détection (J-3 à J-1)
 
 | Jour/Heure | Événement | Actions | Propriétaire | Statut | Détails |
-| --- | --- | --- | --- | --- | --- |
-| J-3 14:00 | Premières anomalies : Latence accrue sur l’API Open Banking (+200ms). | - Vérification des métriques. 
-- Hypothèse initiale : Problème réseau ou charge anormale. | SOC (Analyste L1) | ⚠️ Fausse alerte (classé comme incident mineur). | Outils : Prometheus, Grafana. Logs : api-openbanking-latency.log. |
-| J-3 16:00 | Alertes SOC : Connexions suspectes depuis une IP inconnue (185.220.101.x ) sur le endpoint /api/kyc/verify. | - Analyse des logs : 5 requêtes/minute depuis 185.220.101.x  (vs 0 habituellement). 
-- Vérification IP : Geolocalisation = Russie (VPN). 
-- Classement : Incident de sécurité (niveau moyen). | SOC (Analyste L2) | ⚠️ En investigation. | Outils : Splunk, VirusTotal (pour vérifier l’IP). Action : Bloquer temporairement l’IP. | 
-| J-2 09:00 | Escalade SOC : L’IP 185.220.101.x  tente d’exfiltrer des données via /api/kyc/export. | - Forensic : Analyse des payloads (requêtes POST avec des paramètres suspects). 
-- Hypothèse : Tentative d’exploitation d’une faille dans KYCPro. 
-- Notification : Alerte envoyée au RSSI et à KYCPro. | SOC (Analyste L3) + RSSI | ⚠️ Investigation approfondie. | Outils : Wireshark (capture réseau), Burp Suite (analyse des requêtes). Preuve : Logs api-kyc-export.log. |
-| J-2 14:00 | Réponse de KYCPro : "Aucune anomalie détectée de notre côté." | - SOC : Demande des logs KYCPro pour vérification. 
-- KYCPro : Promet de fournir les logs sous 24h. | SOC + KYCPro | ❌ Retard dans l’investigation. | Problème réaliste : Fournisseur tiers minimise l’incident. |
-| J-2 18:00 | Nouvelle alerte : Augmentation des erreurs 500 sur /api/payments (lié à KYCPro). | - Corrélation : Les erreurs 500 coïncident avec les connexions de 185.220.101.x . 
-- Hypothèse : Attaque par injection SQL ou abus d’API. | SOC + DevOps | ⚠️ Incident critique suspecté. | Outils : SIEM (corrélation des logs). Action : Désactiver temporairement /api/kyc/export. |
+|---|---|---|---|---|---|
+| J-3 14:00 | Premières anomalies : latence accrue sur l'API Open Banking (+200ms). | Vérification des métriques · Hypothèse initiale : problème réseau ou charge anormale. | SOC (Analyste L1) | ⚠️ Fausse alerte — classé incident mineur. | Outils : Prometheus, Grafana. Logs : `api-openbanking-latency.log` |
+| J-3 16:00 | Alertes SOC : connexions suspectes depuis une IP inconnue (185.220.101.x) sur `/api/kyc/verify`. | Analyse des logs : 5 req/min depuis 185.220.101.x (vs 0 habituellement) · Vérification IP : géolocalisation Russie (VPN) · Classement : incident de sécurité niveau moyen. | SOC (Analyste L2) | ⚠️ En investigation. | Outils : Splunk, VirusTotal. Action : blocage temporaire de l'IP. |
+| J-2 09:00 | Escalade SOC : 185.220.101.x tente d'exfiltrer des données via `/api/kyc/export`. | Forensic : analyse des payloads (requêtes POST suspectes) · Hypothèse : exploitation d'une faille KYCPro · Alerte envoyée au RSSI et à KYCPro. | SOC (Analyste L3) + RSSI | ⚠️ Investigation approfondie. | Outils : Wireshark, Burp Suite. Preuve : `api-kyc-export.log` |
+| J-2 14:00 | Réponse KYCPro : "Aucune anomalie détectée de notre côté." | Demande de logs KYCPro pour vérification · KYCPro promet de fournir les logs sous 24h. | SOC + KYCPro | ❌ Retard dans l'investigation. | Fournisseur tiers minimise l'incident. |
+| J-2 18:00 | Nouvelle alerte : augmentation des erreurs 500 sur `/api/payments` (lié à KYCPro). | Corrélation : erreurs 500 coïncident avec connexions 185.220.101.x · Hypothèse : injection SQL ou abus d'API. | SOC + DevOps | ⚠️ Incident critique suspecté. | Outils : SIEM (corrélation des logs). Action : désactivation temporaire de `/api/kyc/export`. |
 
 ---
 
